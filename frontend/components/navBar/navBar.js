@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import logo from '../../public/logo.png'
 
 function navBar() {
@@ -10,9 +11,9 @@ function navBar() {
         </div>
 
         <div className="linksDiv">
-            <div className="link">Home</div>
+            <Link href="/"><div className="link">Home</div></Link>
             <div className="link">Risky Items</div>
-            <div className="link">Risky Movements</div>
+            <Link href="/riskyMovements"><div className="link">Risky Movements</div></Link>
             <div className="link">Alerts</div>
         </div>
     </div>

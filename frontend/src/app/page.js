@@ -1,7 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
 import NavBar from '../../components/navBar/navBar'
-
 import mp4Icon from '../../public/mp4Icon.png'
 
 function page() {
