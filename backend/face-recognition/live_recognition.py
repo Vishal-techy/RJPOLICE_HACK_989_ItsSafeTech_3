@@ -2,7 +2,7 @@ import cv2
 from simple_facerec import SimpleFacerec
 
 sfr = SimpleFacerec()
-sfr.load_encoding_images("images/")
+sfr.load_encoding_images("face-recognition/images/")
 
 cap = cv2.VideoCapture(0)
 
