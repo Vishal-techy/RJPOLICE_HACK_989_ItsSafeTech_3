@@ -1,6 +1,5 @@
-// components/RecordingsList.js
 import { useEffect, useState } from "react";
-import axios from "axios"; // You can use a library like axios for making HTTP requests
+import axios from "axios"; 
 import path from "path";
 
 const RecordingsList = () => {
