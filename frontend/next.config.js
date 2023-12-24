@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    async rewrites() {
+      return [
+        {
+          source: "/recordings/:path*",
+          destination: "/recordings/:path*",
+        },
+      ];
+    },
 
-module.exports = nextConfig
+    // next.config.js
+    pageExtensions: ['jsx', 'js', 'ts', 'tsx'], // Add your file extensions
+    // Other configurations...
+  
+  };
+  
+  module.exports = nextConfig;
+  
