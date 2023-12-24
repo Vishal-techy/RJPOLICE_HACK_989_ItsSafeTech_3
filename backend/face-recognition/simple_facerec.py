@@ -8,7 +8,7 @@ class SimpleFacerec:
     def __init__(self):
         self.known_face_encodings = []
         self.known_face_names = []
-        self.frame_resizing = 0.5
+        self.frame_resizing = 0.3
 
     def load_encoding_images(self, images_path):
         images_path = glob.glob(os.path.join(images_path, "*.*"))
