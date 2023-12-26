@@ -72,18 +72,13 @@ function page() {
         </div>
 
         <div className="recordFeedDiv">
-          {/* <div className="recordFeedOuter">
-            <Image className='mp4Icon' src={mp4Icon} />
-            <p>19-12-2023-20-07-52</p>
-          </div> */}
-
-          <WebSocketComponent onNewRecording={handleNewRecording} />
-          <RecordingsList recordings={updatedRecordings} />
-
-          {/* <div className="recordFeedOuter">
+          <div className="recordFeedOuter">
             <Image className='mp4Icon' src={mp4Icon} />
             <p>19-12-2023-20-07-52</p>
           </div>
+
+          {/* <WebSocketComponent onNewRecording={handleNewRecording} />
+          <RecordingsList recordings={updatedRecordings} /> */}
 
           <div className="recordFeedOuter">
             <Image className='mp4Icon' src={mp4Icon} />
@@ -103,7 +98,12 @@ function page() {
           <div className="recordFeedOuter">
             <Image className='mp4Icon' src={mp4Icon} />
             <p>19-12-2023-20-07-52</p>
-          </div> */}
+          </div>
+
+          <div className="recordFeedOuter">
+            <Image className='mp4Icon' src={mp4Icon} />
+            <p>19-12-2023-20-07-52</p>
+          </div>
         </div>
         
       </div>

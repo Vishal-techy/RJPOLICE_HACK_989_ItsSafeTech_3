@@ -14,6 +14,7 @@ function navBar() {
             <Link href="/"><div className="link">Home</div></Link>
             <div className="link">Risky Items</div>
             <Link href="/riskyMovements"><div className="link">Risky Movements</div></Link>
+            <Link href="/faceRecognition"><div className="link">Face Recognition</div></Link>
             <div className="link">Alerts</div>
         </div>
     </div>

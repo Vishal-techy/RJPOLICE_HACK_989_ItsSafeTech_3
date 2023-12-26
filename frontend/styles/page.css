@@ -39,8 +39,8 @@
   flex-direction: column;
   border-radius: 20px;
   padding: 0.9vw;
-  background-color: #ffffff;
-  border: 1px solid #868686;
+  box-shadow: 4px 4px 21.4px 0px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e0e0e0;
 }
 
 .camFeed {
@@ -82,8 +82,7 @@
   border-radius: 20px;
   width: 17vw;
   height: 12vw;
-  background-color: #ffffff;
-  border: 1px solid #868686;
+  box-shadow: 4px 4px 21.4px 0px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
 
