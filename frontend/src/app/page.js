@@ -49,7 +49,7 @@ function page() {
           </div>
 
           <div className="camFeedOuter">
-            <img  className="camFeed" />
+            <img  className="camFeed" src='http://127.0.0.1:5000/video_feed' />
             <p>Cam 2</p>
           </div>
 
