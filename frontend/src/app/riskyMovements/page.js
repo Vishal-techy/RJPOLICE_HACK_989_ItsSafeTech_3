@@ -115,7 +115,7 @@ function RiskyMovements() {
               </div>
               
               <div className="riskyMovAlertsDiv">
-                <AlertCard alert="A prisoner named Ravi trying to climb on wall"/>
+                <AlertCard alert={JSON.stringify(climbingData)}/>
                 <AlertCard alert="Group are prisoners have weapons in their hand"/>
                 <AlertCard alert="Two prisoners named Raman and one more (not detected) trying to climb on wall"/>
                 
