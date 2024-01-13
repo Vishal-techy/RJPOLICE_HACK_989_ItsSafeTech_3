@@ -1,18 +1,17 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import NavBar from '../../../components/navBar/navBar'
+import NavBar from '../../../components/navBar/navBar';
 import AlertCard from '../../../components/alertCard/alertCard';
 
-import A from '../../../public/A.png'
-import B from '../../../public/B.png'
-import C from '../../../public/C.png'
-import D from '../../../public/D.png'
-import E from '../../../public/E.png'
-import F from '../../../public/F.png'
+import A from '../../../public/A.png';
+import B from '../../../public/B.png';
+import C from '../../../public/C.png';
+import D from '../../../public/D.png';
+import E from '../../../public/E.png';
+import F from '../../../public/F.png';
 
-function riskyMovements() {
-
+function RiskyMovements() {
   const [angles, setAngles] = useState({
     left_elbow_hip_angle: 0,
     right_elbow_hip_angle: 0,
@@ -22,36 +21,96 @@ function riskyMovements() {
     right_hip_knee_angle: 0,
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:5000/angles');
-        const data = await response.json();
-        setAngles(data);
-      } catch (error) {
-        console.error('Error fetching angle data:', error);
+  const [climbingData, setClimbingData] = useState({});
+
+  const checkClimbingStatus = async () => {
+    try {
+      // Fetch angle data from the Flask server
+      const response = await fetch('http://localhost:5555/angles');
+      const anglesData = await response.json();
+
+      // Threshold values
+      const thresholdValues = {
+        "left_elbow_hip_angle": 150,
+        "left_hip_ankle_angle": 110,
+        "left_hip_knee_angle": 140,
+        "right_elbow_hip_angle": 150,
+        "right_hip_ankle_angle": 170,
+        "right_hip_knee_angle": 100
+      };
+
+      // Check if the person is climbing based on threshold values
+      const riskyMovements = {
+        "left_elbow_hip_angle": anglesData.left_elbow_hip_angle >= thresholdValues["left_elbow_hip_angle"],
+        "right_elbow_hip_angle": anglesData.right_elbow_hip_angle >= thresholdValues["right_elbow_hip_angle"],
+        "left_hip_ankle_angle": anglesData.left_hip_ankle_angle >= thresholdValues["left_hip_ankle_angle"],
+        "right_hip_ankle_angle": anglesData.right_hip_ankle_angle >= thresholdValues["right_hip_ankle_angle"],
+        "left_hip_knee_angle": anglesData.left_hip_knee_angle >= thresholdValues["left_hip_knee_angle"],
+        "right_hip_knee_angle": anglesData.right_hip_knee_angle >= thresholdValues["right_hip_knee_angle"],
+      };
+
+      // Print risky movements
+      console.log("Risky Movements:", riskyMovements);
+
+      // Check if the person is climbing the wall
+      if (Object.values(riskyMovements).filter(movement => movement).length >= 3) {
+        console.log("Person is climbing the wall!");
+        setClimbingData({ alert: 'Climbing alert' });
+      } else {
+        console.log("Not climbing");
+        setClimbingData({ alert: 'Not climbing' });
       }
+
+    } catch (error) {
+      console.error('Error fetching angle data:', error);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5555/angles');
+      const data = await response.json();
+      setAngles(data);
+
+      checkClimbingStatus(); // Call the function to check climbing status
+
+    } catch (error) {
+      console.error('Error fetching angle data:', error);
+    } finally {
+      setTimeout(fetchData, 100); // Fetch data every 1 second
+    }
+  };
+
+  useEffect(() => {
+    fetchData(); // Start fetching data when the component mounts
+
+    // Listen for climbing alert updates from the backend
+    const socket = new WebSocket('ws://localhost:5555');
+    socket.addEventListener('message', (event) => {
+      const data = JSON.parse(event.data);
+      setClimbingData(data);
+    });
+
+    return () => {
+      socket.close(); // Close the WebSocket connection when the component unmounts
     };
-
-    const interval = setInterval(fetchData, 100);
-    return () => clearInterval(interval);
-
   }, []);
 
   return (
     <div>
-        <NavBar/>
+      <NavBar />
 
-        <div className="camFeedWrap">
+      <div className="camFeedWrap">
             <div className="headingDiv">
               <div className="heading">Risky Movements Detection</div>
+              <div id="climbingData">{JSON.stringify(climbingData)}</div>
               <div className="subHeading">The risky movements will be detected in this section</div>
             </div>
 
             <div className="riskyMovCamWrap">
               <div className="riskyMovCamDiv">
                 <div className="riskyMovCam">
-                  <img className='riskyMovCamFeed' src="http://127.0.0.1:5000/risky_movements" alt="" />
+                  <img className='riskyMovCamFeed' src="http://127.0.0.1:5555/risky_movements" alt="" />
                 </div>    
               </div>
               
@@ -94,9 +153,9 @@ function riskyMovements() {
                     <Image  className='measuImg' src={F} alt=''/>
                     <p>A: {angles.right_hip_knee_angle}</p>
                   </div>
-          </div>  
+          </div>
     </div>
-  )
+  );
 }
 
-export default riskyMovements
+export default RiskyMovements;
