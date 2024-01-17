@@ -12,10 +12,10 @@ function navBar() {
 
         <div className="linksDiv">
             <Link href="/"><div className="link">Home</div></Link>
-            <div className="link">Risky Items</div>
+            <Link href="/riskyItems"><div className="link">Risky Items</div></Link>
             <Link href="/riskyMovements"><div className="link">Risky Movements</div></Link>
             <Link href="/faceRecognition"><div className="link">Face Recognition</div></Link>
-            <div className="link">Alerts</div>
+            <Link href="/alerts"><div className="link">Alerts</div></Link>
         </div>
     </div>
   )

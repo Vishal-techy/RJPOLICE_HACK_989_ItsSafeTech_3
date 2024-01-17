@@ -109,3 +109,20 @@
   .warning__close path {
     fill: #393A37;
   }
+
+  .alertsDiv {
+    width: 40vw;
+    margin-left: 3vw;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+  }
+
+.alertsCardWrap {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  justify-content: center;
+  column-gap: 50px;
+  margin-left: -2vw;
+}

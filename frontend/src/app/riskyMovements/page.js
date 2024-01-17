@@ -103,7 +103,7 @@ function RiskyMovements() {
       <div className="camFeedWrap">
             <div className="headingDiv">
               <div className="heading">Risky Movements Detection</div>
-              <div id="climbingData">{JSON.stringify(climbingData)}</div>
+              {/* <div id="climbingData">{JSON.stringify(climbingData)}</div> */}
               <div className="subHeading">The risky movements will be detected in this section</div>
             </div>
 
